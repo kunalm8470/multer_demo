@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('partials/head'); %>
+</head>
+
+<body>
+
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="col-2">
+                    <a href="/files">
+                        <i class="fa fa-arrow-circle-left" style="font-size:48px;"></i>
+                    </a>
+                </div>
+
+                <div class="col-8 jumbotron bg-danger">
+                    <div class="card">
+                        <div class="card-header">
+                            <h1>
+                                Not found
+                            </h1>
+                        </div>
+                        <div class="card-body">
+                            Could not navigate to <%= path %>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-2">
+                </div>
+            </div>
+        </div>
+    </main>
+
+</body>
+
+</html>
