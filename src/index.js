@@ -1,4 +1,6 @@
 const express = require('express');
+const { constants } = require('fs');
+const fs = require('fs/promises');
 const path = require('path');
 const config = require('./config');
 
@@ -12,6 +14,15 @@ process
     console.error(err.message);
 });
 
+const bootstrap = async () => {
+    try {
+        // Create upload directory first if doesn't exist
+        await fs.access(config.uploadPath, constants.F_OK);
+    } catch {
+        await fs.mkdir(config.uploadPath, { recursive: true });
+    }
+};
+
 app.use(express.json())
 app.use(express.urlencoded({
     extended: true
@@ -19,6 +30,10 @@ app.use(express.urlencoded({
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+
+(async() => {
+    await bootstrap();
+})();
 
 app.use(require('./routes'));
 
