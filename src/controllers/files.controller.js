@@ -1,6 +1,4 @@
-const fs = require('fs/promises');
-const path = require('path');
-const config = require('../config');
+const fileService = require('../services/files.service');
 
 class FileController {
     constructor() {
@@ -11,19 +9,8 @@ class FileController {
     }
 
     async list(req, res, next) {
-        const files = [];
         try {
-            const directoryFiles = await fs.readdir(config.uploadPath);
-
-            for (const file of directoryFiles) {
-                const { size, birthtime } = await fs.stat(path.join(config.uploadPath, file));
-                files.push({
-                    name: file,
-                    size: `${(size / config.maxFileSize).toFixed(3)} MB`,
-                    createdAt: birthtime.toLocaleString()
-                });
-            }
-
+            const files = await fileService.list();
             return res.render('index', { files });
         } catch (err) {
             return next(err);
@@ -32,12 +19,11 @@ class FileController {
 
     async getOne(req, res, next) {
         try {
-            const filePath = path.join(config.uploadPath, req.params.file);
-            if (!await fs.stat(filePath)) {
-                return res.render('not-found', { path: `/${req.params.file}` });
+            if (!await fileService.fileExist(req.params.file)) {
+                return res.render('not-found', { path: req.originalUrl });
             }
 
-            return res.sendFile(filePath);
+            return res.sendFile(fileService.getFilePath(req.params.file));
         } catch (err) {
             return next(err);
         }
@@ -49,12 +35,11 @@ class FileController {
 
     async delete(req, res, next) {
         try {
-            const filePath = path.join(config.uploadPath, req.params.file);
-            if (!await fs.stat(filePath)) {
-                return res.render('not-found', { path: `/${req.params.file}` });
+            if (!await fileService.fileExist(req.params.file)) {
+                return res.render('not-found', { path: req.originalUrl });
             }
 
-            await fs.unlink(filePath);
+            await fileService.deleteFile(req.params.file);
             return res.redirect('/files');
         } catch(err) {
             return next(err);
