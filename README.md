@@ -1,5 +1,7 @@
 # Avatar upload demo using Multer, Express and EJS
 
+Site deployed in heroku, access [`here`](https://multer-node-app.herokuapp.com/files).
+
 In this project we can add, list, preview and delete images.
 
 Supported image formats are `jpeg`, `jpg`, `bmp` and `png` with file size limited to 1 MB.
