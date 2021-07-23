@@ -1,0 +1,17 @@
+<div class="col-3">
+    <div class="card">
+        <div class="bg-light card-header">Upload your avatar</div>
+        <div class="card-body">
+            <form method="POST" action="/files" enctype="multipart/form-data">
+                <div class="form-row">
+                    <div class="col-12">
+                        <input type="file" class="form-control"
+                            accept="image/x-png,image/gif,image/jpeg,image/bmp" name="avatar">
+                        <br>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

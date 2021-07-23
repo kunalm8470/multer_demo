@@ -11,7 +11,7 @@ class FileController {
     async list(req, res, next) {
         try {
             const files = await fileService.list();
-            return res.render('index', { files });
+            return res.render('pages/index', { files });
         } catch (err) {
             return next(err);
         }
@@ -20,7 +20,7 @@ class FileController {
     async getOne(req, res, next) {
         try {
             if (!await fileService.fileExist(req.params.file)) {
-                return res.render('not-found', { path: req.originalUrl });
+                return res.render('pages/not-found', { path: req.originalUrl });
             }
 
             return res.sendFile(fileService.getFilePath(req.params.file));
@@ -36,7 +36,7 @@ class FileController {
     async delete(req, res, next) {
         try {
             if (!await fileService.fileExist(req.params.file)) {
-                return res.render('not-found', { path: req.originalUrl });
+                return res.render('pages/not-found', { path: req.originalUrl });
             }
 
             await fileService.deleteFile(req.params.file);

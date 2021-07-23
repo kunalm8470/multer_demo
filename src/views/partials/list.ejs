@@ -1,0 +1,45 @@
+<div class="col-6">
+    <div class="card">
+        <div class="bg-light card-header">Files</div>
+        <div class="card-body table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>File</th>
+                        <th>Size</th>
+                        <th>Created</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% files.forEach(function(file) { %>
+                        <tr>
+                            <td>
+                                <div style="display: flex;">
+                                    <span>
+                                        <button class="btn btn-link avatarImg"
+                                            data-filename="<%= file.name %>">
+                                            <%= file.name %>
+                                        </button>
+                                    </span>
+                                    <span style="margin: auto 0 auto auto;">
+                                        <form action="/files/delete/<%= file.name %>" method="POST">
+                                            <button class="btn btn-danger fa fa-trash-o" type="submit"
+                                                style="font-size:18px">
+                                            </button>
+                                        </form>
+                                    </span>
+                                </div>
+                            </td>
+                            <td>
+                                <%= file.size %>
+                            </td>
+                            <td>
+                                <%= file.createdAt %>
+                            </td>
+                        </tr>
+                        <% }); %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
