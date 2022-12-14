@@ -20,7 +20,7 @@
   "homepage": "https://github.com/kunalm8470/multer_demo#readme",
   "dependencies": {
     "ejs": "^3.1.6",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "multer": "^1.4.2"
   },
   "engines": {
