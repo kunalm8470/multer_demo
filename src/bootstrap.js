@@ -5,7 +5,6 @@ const config = require('./config');
 const bootstrap = async () => {
     // Create upload directory first if doesn't exist
     try {
-        
         await fs.access(config.uploadPath, constants.F_OK | constants.R_OK | constants.W_OK);
     } catch {
         try {

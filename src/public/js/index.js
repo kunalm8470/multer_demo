@@ -4,6 +4,7 @@ const onDomLoaded = (e) => {
 
     const onAvatarPreviewClick = (event) => {
         const fileName = event.currentTarget.getAttribute('data-filename');
+        
         try {
             previewEleRef.setAttribute('src', `/files/${fileName}`);
         } catch (err) {
@@ -12,8 +13,8 @@ const onDomLoaded = (e) => {
     };
 
     // Bind click events for each avatar
-    for (let i = 0; i < avatarsRef.length; i++) {
-        avatarsRef[i].addEventListener('click', onAvatarPreviewClick);
+    for (const element of avatarsRef) {
+        element.addEventListener('click', onAvatarPreviewClick);
     }
 };
 

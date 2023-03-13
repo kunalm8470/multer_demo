@@ -3,14 +3,18 @@ const fileService = require('../services/files.service');
 class FileController {
     constructor() {
         this.list = this.list.bind(this);
+
         this.getOne = this.getOne.bind(this);
+        
         this.add = this.add.bind(this);
+        
         this.delete = this.delete.bind(this);
     }
 
     async list(req, res, next) {
         try {
             const files = await fileService.list();
+
             return res.render('pages/index', { files });
         } catch (err) {
             return next(err);
@@ -40,6 +44,7 @@ class FileController {
             }
 
             await fileService.deleteFile(req.params.file);
+
             return res.redirect('/files');
         } catch(err) {
             return next(err);
